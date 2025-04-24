@@ -1,3 +1,5 @@
+
+/*NavBar*/
 Nav {
     background-color: white;
 }
@@ -19,6 +21,7 @@ Nav a:hover{
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 }
+/*Hero Section*/
 .Hero {
     display: flex;
     align-items: center;
@@ -55,6 +58,7 @@ Nav a:hover{
     text-decoration: none;
     color: black;
 }
+/*Extra Section*/
 .extra-index {
     background-color: #f8f8f8; /* Cor de fundo suave */
     padding: 40px; /* Espaçamento interno para o conteúdo não ficar grudado */
@@ -77,6 +81,8 @@ Nav a:hover{
     color: #666; /* Cor mais suave para o texto */
     line-height: 1.6; /* Melhora a legibilidade com espaçamento entre as linhas */
 }
+
+/*Footer Section*/
 
 footer {
     background-color: black;
@@ -120,3 +126,111 @@ footer ul a:hover {
     font-size: 18px;
     margin-bottom: 8px;
 }
+
+/*Login*/
+
+.form-login {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+  }
+
+  .form-login h2 {
+    text-align: center;
+    
+  }
+
+  .form-login label {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  
+  .form-login input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+  }
+  
+  .form-login button {
+    background-color: #333;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+  }
+  
+  .form-login button:hover {
+    background-color: #555;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .form-cadastro {
+    background-color: #f4f4f4;
+    max-width: 600px;
+    margin: 80px auto;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .form-cadastro form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .input-duplo {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .input-duplo div {
+    flex: 1;
+  }
+  
+  .form-cadastro label {
+    margin-bottom: 5px;
+    display: block;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  
+  .form-cadastro input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  .form-cadastro button {
+    padding: 12px;
+    border: none;
+    background-color: #333;
+    color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form-cadastro button:hover {
+    background-color: #555;
+  }
+
+  .form-cadastro h2 {
+    text-align: center;
+  }
