@@ -1,0 +1,50 @@
+/* Container geral da sidebar */
+.sidebar-container {
+    display: flex;            /* Coloca os elementos lado a lado (flexbox) */
+    width: 100%;              /* Ocupa toda a largura disponível */
+    border: 1px solid #ccc;   /* Borda cinza em volta do container */
+  }
+  
+  /* Estilização da barra lateral */
+  .sidebar {
+    width: 200px;             /* Largura fixa da barra lateral */
+    background-color: #333;   /* Cor de fundo escura */
+    color: white;             /* Cor do texto */
+    padding: 10px;            /* Espaçamento interno */
+    height: 100vh;            /* Ocupa 100% da altura da janela de visualização */
+    box-sizing: border-box;   /* Garante que padding não aumente a largura/altura */
+  }
+  
+  /* Estilização dos links */
+  .sidebar a {
+    display: block;           /* Ocupa a linha inteira */
+    color: white;             /* Cor do texto dos links */
+    text-decoration: none;    /* Remove o sublinhado */
+    margin-bottom: 10px;      /* Espaço entre os links */
+    font-size: 130%;
+    margin-top: 55px;
+  }
+  
+  /* Efeito visual ao passar o mouse nos links */
+  .sidebar a:hover {
+    background-color: #444;   /* Fundo um pouco mais claro ao passar o*/
+    font-size: 150%;
+  }
+
+  /*Icone da imagem na sidebar*/
+  #icone{
+    width: 150px;
+    height: 100px;
+    border-radius: 10px;
+  }
+
+  /*Efeito Visual ao passar o mouse sobre a imagem*/
+
+#icone:hover{
+
+  width: 155px;
+  height: 105px;
+  background-color: rgb(74, 68, 68);
+  border-radius: 150px 250px 150px 250px;
+
+}
