@@ -1,15 +1,66 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compras</title>
-    <link rel="stylesheet" href="CarrinhoDecompras.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrinho de Compras</title>
+  <link rel="stylesheet" href="CarrinhoDecompras.css">
 </head>
 <body>
 
+  <!-- Cabeçalho e navegação -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="paginaProdutos.html">Loja</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="CarrinhoDecompras.html">Carrinho</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <h1>teste</h1>
-    
+  <!-- Conteúdo principal -->
+  <main>
+    <!-- Área do carrinho -->
+    <section aria-labelledby="titulo-carrinho">
+      <h1 id="titulo-carrinho">Carrinho de Compras</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Modelo</th>
+            <th>Quantidade</th>
+            <th>Preço Unitário</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Fusca 1965</td>
+            <td>1</td>
+            <td>R$ 35.000,00</td>
+            <td>R$ 35.000,00</td>
+          </tr>
+          <tr>
+            <td>Chevrolet Bel Air 1957</td>
+            <td>1</td>
+            <td>R$ 120.000,00</td>
+            <td>R$ 120.000,00</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Resumo do pedido como uma nota lateral -->
+    <aside>
+      <p><strong>Total do carrinho:</strong> R$ 155.000,00</p>
+      <button type="button">Finalizar Compra</button>
+    </aside>
+  </main>
+
+  <footer>
+    <p>© 2025 OldVillage</p>
+  </footer>
+
 </body>
 </html>
