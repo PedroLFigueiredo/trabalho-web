@@ -123,10 +123,10 @@ Depois, entre na pasta do projeto:
 3. **Abrir o Projeto no VSCode**
 `code .`
 
-4. ** Instalar Extensões Recomendadas**
+5. **Instalar Extensões Recomendadas**
 `code --install-extension ritwickdey.LiveServer`
 
-5. **Rodar o Site Localmente**
+6. **Rodar o Site Localmente**
 Depois de abrir o projeto no VSCode:
 Clique com o botão direito no arquivo index.html.
 Selecione "Open with Live Server".
