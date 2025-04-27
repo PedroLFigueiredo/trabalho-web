@@ -2,11 +2,11 @@
 
 **Grupo:**  
 - Adhemar Molon Neto (14687681)
-- Pedro Lucas  
+- Pedro Lucas Figueiredo Bahiense (14675458)
 
 ---
 
-## Requisitos do Enunciado e Status de Implementação
+## 1) Requisitos do Enunciado e Status de Implementação
 
 - **Dois tipos de usuários: Clientes e Administradores**  
   - ✅ **Clientes:** telas de login (`login.html`) e cadastro (`cadastro.html`) implementadas em HTML/CSS.  
@@ -42,7 +42,7 @@
 ---
 
 
-## Descrição do Projeto
+## 2) Descrição do Projeto
 
 Nesta seção explicamos como cada requisito do enunciado foi atendido no nosso projeto:
 
@@ -76,6 +76,17 @@ Nesta seção explicamos como cada requisito do enunciado foi atendido no nosso 
    - Uso de HTML5 semântico, atributos `alt` em imagens e CSS que se adapta a diferentes larguras de tela.
 
 ---
+
+## 6) Build Procedures
+
+1. **Primeiramente, recomendo que utilize o VSCode como editor de código, para facilitar a utilização**
+   No Windows:
+Baixar o instalador em: https://code.visualstudio.com/
+Executar o instalador e seguir o processo de instalação padrão.
+
+No Linux (Ubuntu/Debian):
+`sudo apt update`
+
 
 Segue o diagrama de navegação que reúne, de forma clara, o fluxo do cliente (Home → Loja → Detalhes → Carrinho → Pagamento) e do administrador (Login → Dashboard → CRUD).
 
