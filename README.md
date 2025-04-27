@@ -1,34 +1,139 @@
-# trabalho-web
- 
-# Loja de Carros
+# Relatório de Entrega – Projeto OldVillage
 
-Este repositório contém os arquivos referentes à criação de telas para um sistema simples de loja de carros, desenvolvido como projeto acadêmico.
+**Grupo:**  
+- Adhemar Molon Neto (14687681)
+- Pedro Lucas Figueiredo Bahiense (14675458)
 
-## 🚀 O que será desenvolvido:
+---
 
-O projeto consiste exclusivamente na criação de telas, utilizando HTML5/CSS3, podendo utilizar também protótipos feitos em Figma.
+## 1) Requisitos do Enunciado e Status de Implementação
 
-## 📌 Telas a serem desenvolvidas:
+- **Dois tipos de usuários: Clientes e Administradores**  
+  - ✅ **Clientes:** telas de login (`login.html`) e cadastro (`cadastro.html`) implementadas em HTML/CSS.  
+  - ✅ **Administradores:** painel administrativo (`PainelAdmin.html`) implementado em HTML/CSS (dashboard estático).
 
-- [ ] Página Principal (cliente)
-- [ ] Login
-- [ ] Cadastro de Cliente
-- [ ] Detalhes do Produto
-- [ ] Carrinho de Compras
-- [ ] Tela de Pagamento
-- [ ] Painel Administrativo
-- [ ] CRUD de Clientes/Admins/Produtos
-- [ ] Funcionalidade Especial: "Ouvir Motor"
+- **Administração de registros (admins, clientes, produtos/serviços)**  
+  - ✅ Dashboard de métricas no painel admin.  
+  - ✅ Mockups estáticos para CRUD de clientes e produtos (`CRUDimage.png`), conforme permitido.
 
-## 🎯 Requisitos principais:
+- **Fluxo de compra (catálogo → detalhe → carrinho → pagamento)**  
+  - ✅ Catálogo de produtos (`paginaProdutos.html`), detalhe (`DetalhesProduto.html`) e carrinho (`CarrinhoDecompras.html`) em HTML/CSS.  
+  - ✅ Mockup estático da tela de pagamento (`TelaPagamento.png`), conforme enunciado.
 
-- Dois tipos de usuários: **Clientes** e **Administradores**.
-- Clientes acessam o sistema para comprar carros.
-- Administradores gerenciam produtos (carros), clientes e administradores.
-- Sistema simula compra com carrinho e pagamento fictício via cartão.
-- Funcionalidade especial interativa (prévia sonora do motor do carro).
+- **Campos mínimos nos registros**  
+  - **Administrador:** ícone e nome exibidos no painel.  
+  - **Cliente:** formulário de cadastro com nome, sobrenome, endereço e e-mail (senha e confirmação).  
+  - **Produto/Serviço:** nome, foto, descrição e preço nas páginas; estatísticas de estoque no painel.
 
-## ✅ Critérios importantes:
+- **Pagamento via cartão e atualização de estoque**  
+  - ✅ Fluxo ilustrado estaticamente nos mockups.
 
-- Projeto responsivo e com boa acessibilidade.
-- Interface simples e intuitiva.
+- **Funcionalidade adicional**  
+  - ✅ Não implementada (opcional, não obrigatória).
+
+- **Acessibilidade e responsividade**  
+  - ✅ HTML5 semântico e atributos `alt` em imagens.  
+  - ✅ Layout responsivo básico sem media-queries específicas (atende ao escopo).
+
+- **Mockups estáticos**  
+  - ✅ Telas principais e pelo menos duas adicionais em HTML/CSS.  
+  - ✅ Demais telas fornecidas como imagens estáticas.
+
+---
+
+
+## 2) Descrição do Projeto
+
+Nesta seção explicamos como cada requisito do enunciado foi atendido no nosso projeto:
+
+1. **Dois tipos de usuários (Clientes e Administradores)**  
+   - **Clientes**: telas de **login** (`login.html`) e **cadastro** (`cadastro.html`) implementadas em HTML/CSS.  
+   - **Administradores**: painel administrativo (`PainelAdmin.html`) implementado em HTML/CSS como mockup estático.
+
+2. **Administração de registros**  
+   - No **Painel Admin** há um mockup estático para CRUD de clientes e produtos (`CRUDimage.png`), com botões “Adicionar”, “Editar” e “Excluir”.  
+   - Todos os elementos (tabelas, botões e formulários) estão prontos em HTML/CSS para futura integração.
+
+3. **Fluxo de compra (catálogo → detalhe → carrinho → pagamento)**  
+   - **Catálogo** (`paginaProdutos.html`): cards com foto, nome e preço de carros clássicos.  
+   - **Detalhes** (`DetalhesProduto.html`): descrição, seleção de quantidade e botão “Adicionar ao Carrinho”.  
+   - **Carrinho** (`CarrinhoDecompras.html`): tabela de itens, quantidades, preços e total, com botão “Finalizar Compra”.  
+   - **Pagamento**: mockup estático em `TelaPagamento.png`, mostrando campos de cartão (número, validade, CVV) e botão “Realizar Pagamento”.
+
+4. **Campos mínimos nos registros**  
+   - **Administrador**: ícone e nome exibidos no painel.  
+   - **Cliente**: formulário com nome, sobrenome, endereço, e-mail, senha e confirmação de senha.  
+   - **Produto/Serviço**: nome, foto, descrição e preço aparecem nas páginas; métricas de estoque são exibidas no painel.
+
+5. **Pagamento e atualização de estoque**  
+   - O fluxo de pagamento é ilustrado estaticamente (aceita qualquer número de cartão).  
+   - A lógica de subtração de estoque e esvaziamento de carrinho está documentada no relatório para implementação futura.
+
+6. **Funcionalidade adicional**  
+   - Não implementada (opcional, não obrigatória).
+
+7. **Acessibilidade e responsividade**  
+   - Uso de HTML5 semântico, atributos `alt` em imagens e CSS que se adapta a diferentes larguras de tela.
+
+## 3) Comentários no Código
+
+## 4) Plano de TESTE
+
+## 5) Resultados do TESTE
+
+## 6) Build Procedures
+
+1. **Primeiramente, recomendo que utilize o VSCode como editor de código, para facilitar a utilização**
+No Windows:
+Baixar o instalador em: https://code.visualstudio.com/
+Executar o instalador e seguir o processo de instalação padrão.
+
+No Linux (Ubuntu/Debian):
+
+`sudo apt update`
+
+
+`sudo apt install wget gpg`
+
+
+`wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg`
+
+
+`sudo install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/`
+
+
+`sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'`
+
+
+`sudo apt update`
+
+
+`sudo apt install code`
+
+No MacOS (via Homebrew):
+
+`brew install --cask visual-studio-code`
+
+2. **Clonar o Repositório do GitHub**
+Abra o terminal (Prompt de Comando / Bash / Terminal no VSCode) e execute:
+`git clone https://github.com/PedroLFigueiredo/trabalho-web`
+Depois, entre na pasta do projeto:
+`cd trabalho-web`
+
+3. **Abrir o Projeto no VSCode**
+`code .`
+
+5. **Instalar Extensões Recomendadas**
+`code --install-extension ritwickdey.LiveServer`
+
+6. **Rodar o Site Localmente**
+Depois de abrir o projeto no VSCode:
+Clique com o botão direito no arquivo index.html.
+Selecione "Open with Live Server".
+
+## 7) Problemas
+
+## 8) Comentários
+Segue o diagrama de navegação que reúne, de forma clara, o fluxo do cliente (Home → Loja → Detalhes → Carrinho → Pagamento) e do administrador (Login → Dashboard → CRUD).
+
+[Diagrama no figma](https://www.figma.com/board/pZDPqv7UvFYghKqv8pcshm/Welcome-to-FigJam?node-id=0-1&t=n6sKGRS8saUAXC7s-1)
