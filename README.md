@@ -75,19 +75,53 @@ Nesta seção explicamos como cada requisito do enunciado foi atendido no nosso 
 7. **Acessibilidade e responsividade**  
    - Uso de HTML5 semântico, atributos `alt` em imagens e CSS que se adapta a diferentes larguras de tela.
 
----
+## 3) Comentários no Código
+
+## 4) Plano de TESTE
+
+## 5) Resultados do TESTE
 
 ## 6) Build Procedures
 
 1. **Primeiramente, recomendo que utilize o VSCode como editor de código, para facilitar a utilização**
-   No Windows:
+No Windows:
 Baixar o instalador em: https://code.visualstudio.com/
 Executar o instalador e seguir o processo de instalação padrão.
 
 No Linux (Ubuntu/Debian):
+
 `sudo apt update`
+`sudo apt install wget gpg`
+`wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg`
+`sudo install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/`
+`sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'`
+`sudo apt update`
+`sudo apt install code`
 
+No MacOS (via Homebrew):
 
+`brew install --cask visual-studio-code`
+
+2. **Clonar o Repositório do GitHub**
+Abra o terminal (Prompt de Comando / Bash / Terminal no VSCode) e execute:
+`git clone https://github.com/PedroLFigueiredo/trabalho-web`
+Depois, entre na pasta do projeto:
+`cd trabalho-web`
+
+3. **Abrir o Projeto no VSCode**
+`code .`
+
+4. ** Instalar Extensões Recomendadas**
+`code --install-extension ritwickdey.LiveServer`
+
+5. **Rodar o Site Localmente**
+Depois de abrir o projeto no VSCode:
+Clique com o botão direito no arquivo index.html.
+Selecione "Open with Live Server".
+
+## 7) Problemas
+
+## 8) Comentários
 Segue o diagrama de navegação que reúne, de forma clara, o fluxo do cliente (Home → Loja → Detalhes → Carrinho → Pagamento) e do administrador (Login → Dashboard → CRUD).
 
 [Diagrama no figma](https://www.figma.com/board/pZDPqv7UvFYghKqv8pcshm/Welcome-to-FigJam?node-id=0-1&t=n6sKGRS8saUAXC7s-1)
