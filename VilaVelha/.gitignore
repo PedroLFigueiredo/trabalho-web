@@ -1,0 +1,40 @@
+# Node
+node_modules/
+.env
+.env.local
+.env.*.local
+.npm/
+
+# Build
+dist/
+build/
+.vite/
+.vite-cache/
+coverage/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store
+
+# Sistema operacional
+Thumbs.db
+ehthumbs.db
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Outros
+*.log
+*.tgz
+
+# VSCode settings
+*.code-workspace
+
+# shadcn/ui output
+components.json
