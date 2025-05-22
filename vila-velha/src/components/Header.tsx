@@ -17,12 +17,33 @@ const Header = () => {
           </Link>
         </div>
         
-        <nav className="flex items-center space-x-2 md:space-x-6">
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/loja">Loja</NavLink>
-          <NavLink to="/carrinho">Carrinho</NavLink>
-          <NavLink to="/login" className="md:ml-4 vintage-button">Login</NavLink>
-        </nav>
+          <nav className="flex items-center space-x-2 md:space-x-6">
+            <NavLink
+              to="/"
+              className="bg-[#5e3a1f] text-white px-4 py-2 rounded-full hover:bg-[#3e2f2f] transition"
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/loja"
+              className="bg-[#5e3a1f] text-white px-4 py-2 rounded-full hover:bg-[#3e2f2f] transition"
+            >
+              Loja
+            </NavLink>
+            <NavLink
+              to="/carrinho"
+              className="bg-[#5e3a1f] text-white px-4 py-2 rounded-full hover:bg-[#3e2f2f] transition"
+            >
+              Carrinho
+            </NavLink>
+            <NavLink
+              to="/login"
+              className="bg-[#5e3a1f] text-white px-4 py-2 rounded-full hover:bg-[#3e2f2f] transition"
+            >
+              Login
+            </NavLink>
+          </nav>
+
       </div>
     </header>
   );
