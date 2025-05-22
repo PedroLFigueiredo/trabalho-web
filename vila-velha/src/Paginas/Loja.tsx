@@ -28,6 +28,7 @@ function Loja() {
                 preco={carro.preco}
                 imagem={carro.imagem}
                 estoque={carro.estoque}
+                slug={carro.slug}
               />
             ))}
           </div>

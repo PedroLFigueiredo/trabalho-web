@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 interface CardCarroProps {
   modelo: string;
@@ -7,6 +9,7 @@ interface CardCarroProps {
   preco: string;
   imagem?: string;
   estoque?: number;
+  slug: string;
 }
 
 
@@ -16,7 +19,8 @@ const CardCarro = ({
   descricao,
   preco,
   imagem = "https://placehold.co/400x300/e9e2d0/8B4513?text=Carro+Antigo",
-  estoque
+  estoque,
+  slug
 }: CardCarroProps) => {
   return (
     <div className="vintage-card overflow-hidden flex flex-col h-full relative rounded-lg shadow-md border border-[#c4a484] hover:scale-105 transition-transform duration-300">
@@ -42,10 +46,11 @@ const CardCarro = ({
         <p className="text-[#3e2f2f] font-serif mb-4 flex-grow">
           {descricao}
         </p>
-
-        <button className="bg-[#3e2f2f] text-white px-4 py-2 rounded-md mt-auto hover:bg-[#5e3a1f] transition-colors">
-          Ver detalhes
-        </button>
+            <Link to={`/carro/${slug}`}>
+              <button className="bg-[#3e2f2f] text-white px-4 py-2 rounded-md mt-auto hover:bg-[#5e3a1f] transition-colors">
+                Ver detalhes
+              </button>
+            </Link>
           {typeof estoque === 'number' && (
             <div className="mt-3 text-sm text-[#5e3a1f] font-semibold">
               {estoque > 0
@@ -59,3 +64,5 @@ const CardCarro = ({
 };
 
 export default CardCarro;
+
+

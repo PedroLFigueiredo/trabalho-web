@@ -5,7 +5,8 @@ const estoqueLoja = [
     "descricao": "Luxo sobre rodas com presença imponente.",
     "preco": "R$ 185.579",
     "imagem": "/imagens/ChevroletBelAir.jpg",
-    "estoque": 1
+    "estoque": 1,
+    "slug": "chevrolet-bel-air"
   },
   {
     "modelo": "Volkswagen Fusca",
@@ -13,7 +14,8 @@ const estoqueLoja = [
     "descricao": "Luxo sobre rodas com presença imponente.",
     "preco": "R$ 181.671",
     "imagem": "/imagens/VolkswagenFusca.jpg",
-    "estoque": 9
+    "estoque": 9,
+    "slug": "volkswagen-fusca"
   },
   {
     "modelo": "Ford Mustang",
@@ -21,7 +23,8 @@ const estoqueLoja = [
     "descricao": "Uma verdadeira relíquia sobre rodas.",
     "preco": "R$ 131.992",
     "imagem": "/imagens/FordMustang.jpg",
-    "estoque": 9
+    "estoque": 9,
+    "slug": "ford-mustang"
   },
   {
     "modelo": "Cadillac Eldorado",
@@ -29,7 +32,8 @@ const estoqueLoja = [
     "descricao": "Estilo marcante e história nas pistas.",
     "preco": "R$ 110.645",
     "imagem": "/imagens/CadillacEldorado.jpg",
-    "estoque": 3
+    "estoque": 3,
+    "slug": "cadillac-eldorado"
   },
   {
     "modelo": "Opala SS",
@@ -37,7 +41,8 @@ const estoqueLoja = [
     "descricao": "Visual agressivo e motor potente.",
     "preco": "R$ 68.640",
     "imagem": "/imagens/OpalaSS.jpg",
-    "estoque": 3
+    "estoque": 3,
+    "slug": "opala-ss"
   },
   {
     "modelo": "Plymouth Barracuda",
@@ -45,7 +50,8 @@ const estoqueLoja = [
     "descricao": "Estilo marcante e história nas pistas.",
     "preco": "R$ 213.793",
     "imagem": "/imagens/PlymouthBarracuda.jpg",
-    "estoque": 0
+    "estoque": 0,
+    "slug": "plymouth-barracuda"
   },
   {
     "modelo": "Dodge Charger R/T",
@@ -53,7 +59,8 @@ const estoqueLoja = [
     "descricao": "Design esportivo e alma brasileira.",
     "preco": "R$ 296.451",
     "imagem": "/imagens/DodgeChargerRT.jpg",
-    "estoque": 6
+    "estoque": 6,
+    "slug": "dodge-charger-rt"
   },
   {
     "modelo": "Chevrolet Camaro Z28",
@@ -61,7 +68,8 @@ const estoqueLoja = [
     "descricao": "Uma verdadeira relíquia sobre rodas.",
     "preco": "R$ 94.797",
     "imagem": "/imagens/ChevroletCamaroZ28.jpg",
-    "estoque": 9
+    "estoque": 9,
+    "slug": "chevrolet-camaro-z28"
   },
   {
     "modelo": "Mercedes-Benz 300SL",
@@ -69,7 +77,8 @@ const estoqueLoja = [
     "descricao": "Design esportivo e alma brasileira.",
     "preco": "R$ 113.158",
     "imagem": "/imagens/Mercedes-Benz300SL.jpg",
-    "estoque": 3
+    "estoque": 3,
+    "slug": "mercedes-benz-300sl"
   },
   {
     "modelo": "Fiat 147",
@@ -77,7 +86,8 @@ const estoqueLoja = [
     "descricao": "Uma verdadeira relíquia sobre rodas.",
     "preco": "R$ 76.059",
     "imagem": "/imagens/Fiat147.jpg",
-    "estoque": 10
+    "estoque": 10,
+    "slug": "fiat-147"
   },
   {
     "modelo": "Ford Maverick",
@@ -85,7 +95,8 @@ const estoqueLoja = [
     "descricao": "Símbolo de elegância e potência vintage.",
     "preco": "R$ 156.508",
     "imagem": "/imagens/FordMaverick.jpg",
-    "estoque": 3
+    "estoque": 3,
+    "slug": "ford-maverick"
   },
   {
     "modelo": "Chevrolet Impala",
@@ -93,7 +104,8 @@ const estoqueLoja = [
     "descricao": "Compacto, simpático e cheio de histórias.",
     "preco": "R$ 143.071",
     "imagem": "/imagens/ChevroletImpala.jpg",
-    "estoque": 6
+    "estoque": 6,
+    "slug": "chevrolet-impala"
   },
   {
     "modelo": "Toyota Bandeirante",
@@ -101,7 +113,8 @@ const estoqueLoja = [
     "descricao": "Estilo marcante e história nas pistas.",
     "preco": "R$ 119.026",
     "imagem": "/imagens/ToyotaBandeirante.jpg",
-    "estoque": 2
+    "estoque": 2,
+    "slug": "toyota-bandeirante"
   },
   {
     "modelo": "Jeep Willys",
@@ -109,7 +122,8 @@ const estoqueLoja = [
     "descricao": "Força, elegância e espírito de liberdade americana.",
     "preco": "R$ 187.798",
     "imagem": "/imagens/JeepWillys.jpg",
-    "estoque": 1
+    "estoque": 1,
+    "slug": "jeep-willys"
   },
   {
     "modelo": "Karmann Ghia",
@@ -117,7 +131,8 @@ const estoqueLoja = [
     "descricao": "Força, elegância e espírito de liberdade americana.",
     "preco": "R$ 187.617",
     "imagem": "/imagens/KarmannGhia.jpg",
-    "estoque": 5
+    "estoque": 5,
+    "slug": "karmann-ghia"
   },
   {
     "modelo": "Alfa Romeo Spider",
@@ -125,7 +140,8 @@ const estoqueLoja = [
     "descricao": "Design esportivo e alma brasileira.",
     "preco": "R$ 185.472",
     "imagem": "/imagens/AlfaRomeoSpider.jpg",
-    "estoque": 0
+    "estoque": 0,
+    "slug": "alfa-romeo-spider"
   },
   {
     "modelo": "Peugeot 504",
@@ -133,7 +149,8 @@ const estoqueLoja = [
     "descricao": "Símbolo de elegância e potência vintage.",
     "preco": "R$ 248.619",
     "imagem": "/imagens/Peugeot504.jpg",
-    "estoque": 12
+    "estoque": 12,
+    "slug": "peugeot-504"
   },
   {
     "modelo": "BMW 2002",
@@ -141,7 +158,8 @@ const estoqueLoja = [
     "descricao": "Símbolo de elegância e potência vintage.",
     "preco": "R$ 156.976",
     "imagem": "/imagens/BMW2002.jpg",
-    "estoque": 2
+    "estoque": 2,
+    "slug": "bmw-2002"
   },
   {
     "modelo": "Renault Dauphine",
@@ -149,7 +167,8 @@ const estoqueLoja = [
     "descricao": "Luxo sobre rodas com presença imponente.",
     "preco": "R$ 219.762",
     "imagem": "/imagens/RenaultDauphine.jpg",
-    "estoque": 5
+    "estoque": 5,
+    "slug": "renault-dauphine"
   },
   {
     "modelo": "Citroën DS",
@@ -157,7 +176,8 @@ const estoqueLoja = [
     "descricao": "Símbolo de elegância e potência vintage.",
     "preco": "R$ 120.120",
     "imagem": "/imagens/CitroënDS.jpg",
-    "estoque": 6
+    "estoque": 6,
+    "slug": "citroën-ds"
   },
   {
     "modelo": "Puma GT",
@@ -165,7 +185,8 @@ const estoqueLoja = [
     "descricao": "Conservado com originalidade de fábrica.",
     "preco": "R$ 260.776",
     "imagem": "/imagens/PumaGT.jpg",
-    "estoque": 4
+    "estoque": 4,
+    "slug": "puma-gt"
   }
 ];
 
