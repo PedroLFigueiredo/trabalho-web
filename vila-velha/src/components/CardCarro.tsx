@@ -38,7 +38,7 @@ const CardCarro = ({
       <div className="p-4 flex flex-col flex-grow">
         <div className="mb-2 flex items-center justify-between">
           <h3 className="font-retro text-2xl text-[#5e3a1f]">{modelo}</h3>
-          <div className="text-[#9b4c28] font-semibold">{preco}</div>
+          <div className="text-[#9b4c28] font-semibold"><p>R$ {preco}</p></div>
         </div>
 
         <div className="h-px w-full bg-[#c4a484] my-3"></div>
