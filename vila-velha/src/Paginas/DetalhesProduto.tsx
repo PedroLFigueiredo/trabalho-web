@@ -57,10 +57,30 @@ function DetalhesCarro() {
             <h2 className="text-4xl font-retro text-[#5e3a1f]">
               {carro.modelo} ({carro.ano})
             </h2>
-            <p className="text-xl font-serif text-[#3e2f2f]">{carro.descricao}</p>
-            <p className="text-2xl font-bold text-[#9b4c28]">
-              {carro.preco}
-            </p>
+              {carro.descricaoDetalhada ? (
+                <p className="text-lg font-serif text-[#3e2f2f] leading-relaxed">
+                  {carro.descricaoDetalhada}
+                </p>
+              ) : (
+                <p className="text-xl font-serif text-[#3e2f2f]">
+                  {carro.descricao}
+                </p>
+              )}
+                {carro.audio && (
+                  <div className="mt-4">
+                    <p className="text-[#5e3a1f] font-medium mb-1">Ouça o ronco do motor:</p>
+                    <audio controls className="w-full md:w-96">
+                      <source src={carro.audio} type="audio/mpeg" />
+                      Seu navegador não suporta o elemento de áudio.
+                    </audio>
+                  </div>
+                )}
+                <p className="text-2xl font-bold text-[#9b4c28]">
+                  {carro.preco.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL"
+                  })}
+                </p>
             <p className="text-md text-[#5e3a1f] font-medium">
               {carro.estoque && carro.estoque > 0
                 ? `${carro.estoque} unidade(s) em estoque`

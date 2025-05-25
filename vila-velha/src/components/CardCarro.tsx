@@ -25,14 +25,18 @@ const CardCarro = ({
   return (
     <div className="vintage-card overflow-hidden flex flex-col h-full relative rounded-lg shadow-md border border-[#c4a484] hover:scale-105 transition-transform duration-300">
       <div className="relative">
-        {seloDilvan && (
-          <img
-            src="\public\imagens\SeloDilvanDeQualidade.png"
-            alt="Selo de aprovação Dilvan"
-            className="absolute top-5 left-2 w-20 h-20 z-20 animate-pulse"
-          />
-        )}
-
+          {seloDilvan && (
+            <div className="absolute top-2 left-2 z-20 group">
+              <img
+                src="/imagens/SeloDilvanDeQualidade.png"
+                alt="Selo de aprovação Dilvan"
+                className="w-20 h-20 animate-pulse"
+              />
+              <div className="absolute -bottom-7 left-1 bg-[#5e3a1f] text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap shadow">
+                Selo de Aprovação Dilvan !!
+              </div>
+            </div>
+          )}
         <img
           src={imagem}
           alt={`${modelo} ${ano}`}
