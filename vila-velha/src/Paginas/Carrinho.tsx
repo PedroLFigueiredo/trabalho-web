@@ -19,7 +19,7 @@ function Carrinho() {
 
         {cartItems.length === 0 ? (
           <div className="text-center">
-            <p className="text-xl mb-4">Seu carrinho está vazio 😕</p>
+            <p className="text-xl mb-4">Seu carrinho está vazio</p>
             <button
               onClick={() => navigate('/')}
               className="px-4 py-2 bg-[#5e3a1f] text-white rounded hover:bg-[#3e2f2f] transition"

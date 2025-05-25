@@ -22,6 +22,10 @@ function Login() {
   };
 
   return (
+
+
+    <div className="flex flex-col min-h-screen">
+      <Header />
     <div className="flex flex-col min-h-screen justify-center items-center bg-[#fffaf2]">
         
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
@@ -59,6 +63,7 @@ function Login() {
 
       </div>
     </div>
+  </div>
   );
 }
 

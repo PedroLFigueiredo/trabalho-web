@@ -29,7 +29,7 @@ function Home() {
                   modelo={carro.modelo}
                   ano={carro.ano}
                   descricao={carro.descricao}
-                  preco={carro.preco}
+                  preco={carro.preco.toString()}
                   imagem={carro.imagem}
                   estoque={carro.estoque}
                   slug={carro.slug}
