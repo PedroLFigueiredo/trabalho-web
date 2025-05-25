@@ -8,6 +8,7 @@ import { CartProvider } from './Paginas/CarrinhoContext';
 import Login from './Paginas/Login'
 import Cadastro from './Paginas/Cadastro'
 import Pagamento from './Paginas/Pagamento';
+import PainelAdmin from './Paginas/PainelAdmin';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/pagamento" element={<Pagamento />} />
+          <Route path="/paineladmin" element={<PainelAdmin />} />
         </Routes>
       </CartProvider>
     </BrowserRouter>

@@ -14,9 +14,15 @@ function Login() {
 
     // Simulação
     if (email === 'admin@carros.com' && senha === '123456') {
+      localStorage.setItem('isAdmin', 'true');
+      alert('Login como administrador!');
+      navigate('/paineladmin');
+    }else if(email === 'cliente@carros.com' && senha === '654321'){
+      localStorage.setItem('isAdmin', 'false');
       alert('Login bem-sucedido!');
       navigate('/');
-    } else {
+    }
+    else {
       alert('Credenciais inválidas');
     }
   };
