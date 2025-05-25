@@ -85,7 +85,8 @@ function Carrinho() {
                 </button>
 
                 <button
-                  onClick={() => navigate('/checkout')}
+                  onClick={() => navigate('/pagamento')}
+                  disabled={cartItems.length === 0}
                   className="px-6 py-2 bg-[#3e2f2f] text-white rounded hover:bg-[#5e3a1f] transition"
                 >
                   Finalizar Compra

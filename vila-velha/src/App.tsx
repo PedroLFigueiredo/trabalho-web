@@ -7,6 +7,7 @@ import Carrinho from './Paginas/Carrinho';
 import { CartProvider } from './Paginas/CarrinhoContext'; 
 import Login from './Paginas/Login'
 import Cadastro from './Paginas/Cadastro'
+import Pagamento from './Paginas/Pagamento';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/carrinho" element={<Carrinho />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/pagamento" element={<Pagamento />} />
         </Routes>
       </CartProvider>
     </BrowserRouter>
