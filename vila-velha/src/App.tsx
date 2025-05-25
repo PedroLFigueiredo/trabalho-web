@@ -21,6 +21,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/pagamento" element={<Pagamento />} />
+          <Route path="/pagamento" element={<Pagamento />} />
         </Routes>
       </CartProvider>
     </BrowserRouter>
