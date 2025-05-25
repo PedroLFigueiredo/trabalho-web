@@ -29,6 +29,7 @@ function Loja() {
                 imagem={carro.imagem}
                 estoque={carro.estoque}
                 slug={carro.slug}
+                seloDilvan={carro.seloDilvan}
               />
             ))}
           </div>

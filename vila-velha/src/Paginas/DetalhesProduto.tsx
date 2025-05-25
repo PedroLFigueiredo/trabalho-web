@@ -15,7 +15,7 @@ function DetalhesCarro() {
   if (!carro) {
     return (
       <div className="p-8 text-center">
-        <h2 className="text-2xl text-red-600">Carro não encontrado 😢</h2>
+        <h2 className="text-2xl text-red-600">Carro não encontrado </h2>
         <button
           onClick={() => navigate(-1)}
           className="mt-4 px-4 py-2 bg-[#5e3a1f] text-white rounded"

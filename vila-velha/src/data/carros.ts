@@ -6,7 +6,8 @@ const estoqueLoja = [
     "preco": 185.579,
     "imagem": "/imagens/ChevroletBelAir.jpg",
     "estoque": 1,
-    "slug": "chevrolet-bel-air"
+    "slug": "chevrolet-bel-air",
+    "seloDilvan": true
   },
   {
     "modelo": "Volkswagen Fusca",
@@ -15,7 +16,8 @@ const estoqueLoja = [
     "preco": 181.671,
     "imagem": "/imagens/VolkswagenFusca.jpg",
     "estoque": 9,
-    "slug": "volkswagen-fusca"
+    "slug": "volkswagen-fusca",
+    "seloDilvan": true
   },
   {
     "modelo": "Ford Mustang",
@@ -24,7 +26,9 @@ const estoqueLoja = [
     "preco": 131.992,
     "imagem": "/imagens/FordMustang.jpg",
     "estoque": 9,
-    "slug": "ford-mustang"
+    "slug": "ford-mustang",
+    "seloDilvan": true
+
   },
   {
     "modelo": "Cadillac Eldorado",
