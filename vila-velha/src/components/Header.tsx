@@ -1,8 +1,17 @@
-
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
+  const isAdmin = localStorage.getItem('isAdmin') === 'true';
+  const isLoggedIn = localStorage.getItem('isAdmin') !== null;
+
+  const handleLogout = () => {
+    localStorage.removeItem('isAdmin');
+    alert('Você saiu da conta.');
+    navigate('/');
+  };
+
   return (
     <header className="bg-vintage-cream border-b-2 border-vintage-gold py-4 px-6 md:px-10 shadow-sm">
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
@@ -16,34 +25,48 @@ const Header = () => {
             </p>
           </Link>
         </div>
-        
-          <nav className="flex items-center space-x-2 md:space-x-6">
-            <NavLink
-              to="/"
-              className="bg-[#5e3a1f] text-white px-4 py-2 rounded-full hover:bg-[#3e2f2f] transition"
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to="/loja"
-              className="bg-[#5e3a1f] text-white px-4 py-2 rounded-full hover:bg-[#3e2f2f] transition"
-            >
-              Loja
-            </NavLink>
-            <NavLink
-              to="/carrinho"
-              className="bg-[#5e3a1f] text-white px-4 py-2 rounded-full hover:bg-[#3e2f2f] transition"
-            >
-              Carrinho
-            </NavLink>
-            <NavLink
-              to="/login"
-              className="bg-[#5e3a1f] text-white px-4 py-2 rounded-full hover:bg-[#3e2f2f] transition"
-            >
+
+        <nav className="flex items-center space-x-2 md:space-x-6">
+          <NavLink to="/" className="bg-[#5e3a1f] text-white px-4 py-2 rounded-full hover:bg-[#3e2f2f] transition">
+            Home
+          </NavLink>
+          <NavLink to="/loja" className="bg-[#5e3a1f] text-white px-4 py-2 rounded-full hover:bg-[#3e2f2f] transition">
+            Loja
+          </NavLink>
+          <NavLink to="/carrinho" className="bg-[#5e3a1f] text-white px-4 py-2 rounded-full hover:bg-[#3e2f2f] transition">
+            Carrinho
+          </NavLink>
+
+          {isAdmin ? (
+            <>
+              <NavLink to="/paineladmin" className="bg-green-700 text-white px-4 py-2 rounded-full hover:bg-green-800 transition">
+                Painel Admin
+              </NavLink>
+              <button
+                onClick={handleLogout}
+                className="bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition font-dmserif text-lg"
+              >
+                Sair 
+              </button>
+            </>
+          ) : isLoggedIn ? (
+            <>
+              {/* <NavLink to="/perfil" className="bg-blue-700 text-white px-4 py-2 rounded-full hover:bg-blue-800 transition">   Talvez futuramente colocar um perfil de usuário
+                Perfil
+              </NavLink> */} 
+              <button
+                onClick={handleLogout}
+                className="bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition font-dmserif text-lg"
+              >
+                Sair
+              </button>
+            </>
+          ) : (
+            <NavLink to="/login" className="bg-[#5e3a1f] text-white px-4 py-2 rounded-full hover:bg-[#3e2f2f] transition">
               Login
             </NavLink>
-          </nav>
-
+          )}
+        </nav>
       </div>
     </header>
   );

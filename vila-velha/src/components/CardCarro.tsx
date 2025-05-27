@@ -10,7 +10,17 @@ interface CardCarroProps {
   estoque?: number;
   slug: string;
   seloDilvan?: boolean;
+
+  /** Só para admin: ativa modo de edição */
+  isAdmin?: boolean;
+
+  /** Só para admin: callback ao editar */
+  onUpdate?: (
+    campo: 'preco' | 'estoque' | 'descricao', 
+    valor: string | number
+  ) => void;
 }
+
 
 const CardCarro = ({
   modelo,
