@@ -1,20 +1,21 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-interface CartItem {
+// Exportando a interface CartItem para uso em outros módulos
+export interface CartItem {
   modelo: string;
   ano: number;
   descricao: string;
-  precoNumero: number;          
+  precoNumero: number;
   imagem?: string;
-  estoque?: number;       
+  estoque?: number;
   slug: string;
-  quantidade: number;    
+  quantidade: number;
 }
 
 interface CartContextData {
   cartItems: CartItem[];
   addToCart: (item: CartItem) => void;
-  decreaseQty: (slug: string) => void;      
+  decreaseQty: (slug: string) => void;
   removeFromCart: (slug: string) => void;
   clearCart: () => void;
   total: number;
@@ -22,35 +23,34 @@ interface CartContextData {
 
 const CartContext = createContext<CartContextData | null>(null);
 
-export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   const addToCart = (item: CartItem) => {
-    setCartItems(prev =>
-      prev.some(i => i.slug === item.slug)
-        ? prev.map(i =>
-            i.slug === item.slug
-              ? { ...i, quantidade: i.quantidade + 1 }
-              : i
+    setCartItems(prevItems =>
+      prevItems.some(i => i.slug === item.slug)
+        ? prevItems.map(i =>
+            i.slug === item.slug ? { ...i, quantidade: i.quantidade + 1 } : i
           )
-        : [...prev, { ...item, quantidade: 1 }]
+        : [...prevItems, { ...item, quantidade: 1 }]
     );
   };
 
   const decreaseQty = (slug: string) => {
-    setCartItems(prev =>
-      prev.flatMap(i =>
+    setCartItems(prevItems =>
+      prevItems.flatMap(i =>
         i.slug === slug
           ? i.quantidade > 1
             ? [{ ...i, quantidade: i.quantidade - 1 }]
-            : [] 
+            : []
           : [i]
       )
     );
   };
 
-  const removeFromCart = (slug: string) =>
-    setCartItems(prev => prev.filter(i => i.slug !== slug));
+  const removeFromCart = (slug: string) => {
+    setCartItems(prevItems => prevItems.filter(i => i.slug !== slug));
+  };
 
   const clearCart = () => setCartItems([]);
 
@@ -68,9 +68,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   );
 };
 
-export const useCart = () => {
-  const ctx = useContext(CartContext);
-  if (!ctx) throw new Error('useCart deve ser usado dentro de CartProvider');
-  return ctx;
-};
-
+// Hook para consumir o contexto do carrinho
+export function useCart() {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error('useCart deve ser usado dentro de CartProvider');
+  }
+  return context;
+}

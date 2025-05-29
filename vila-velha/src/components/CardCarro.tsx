@@ -60,7 +60,12 @@ const CardCarro = ({
       <div className="p-4 flex flex-col flex-grow">
         <div className="mb-2 flex items-center justify-between">
           <h3 className="font-retro text-2xl text-[#5e3a1f]">{modelo}</h3>
-          <div className="text-[#9b4c28] font-semibold">{preco}</div>
+          <p className="text-2xl font-bold text-[#9b4c28]">
+          {Number(preco).toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          })}
+        </p>
         </div>
 
         <div className="h-px w-full bg-[#c4a484] my-3"></div>
