@@ -57,7 +57,6 @@ function Home() {
                     descricao={carro.descricao}
                     preco={carro.preco.toString()}
                     imagem={carro.imagem}
-                    estoque={carro.estoque}
                     slug={carro.slug}
                     seloDilvan={!!carro.seloDilvan}
                   />
