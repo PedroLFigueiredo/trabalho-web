@@ -41,3 +41,8 @@ tailwind.config.js.backup.*
 
 # Output de build do Vite (caso use preview externo)
 .vitepress/
+
+
+# Arquivos de build
+*.pdf
+
