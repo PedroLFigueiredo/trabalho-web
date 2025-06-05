@@ -24,7 +24,7 @@ O objetivo do projeto é criar uma pequena loja de carros, com as funcionalidade
 ## Demonstração
 
 
-![Página inicial](read/Home.png)![Interface do Carrinho de compras](Carrinho.png)![Login](Login.png)![Página da loja de carros](Loja.png)![Página de pagamento](Pagamento.png)![Painel Admin](Admin.png)
+![Página inicial](vila-velha/read/Home.png)![Interface do Carrinho de compras](Carrinho.png)![Login](Login.png)![Página da loja de carros](Loja.png)![Página de pagamento](Pagamento.png)![Painel Admin](Admin.png)
 ## Rodando os testes
 
 Para rodar os testes siga os seguintes passos:
