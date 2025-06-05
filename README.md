@@ -25,10 +25,15 @@ O objetivo do projeto é criar uma pequena loja de carros, com as funcionalidade
 
 - Página inicial
 ![Página inicial](vila-velha/read/Home.png)
+- Carrinho de compras
 ![Interface do Carrinho de compras](vila-velha/read/Carrinho.png)
+- Tela de Login
 ![Login](vila-velha/read/Login.png)
+- Página da Loja
 ![Página da loja de carros](vila-velha/read/Loja.png)
+- Página do pagamento
 ![Página de pagamento](vila-velha/read/Pagamento.png)
+- Painel Administrador
 ![Painel Admin](vila-velha/read/Admin.png)
 ## Rodando os testes
 
