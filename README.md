@@ -23,7 +23,7 @@ O objetivo do projeto é criar uma pequena loja de carros, com as funcionalidade
 
 ## Demonstração
 
-
+- Página inicial
 ![Página inicial](vila-velha/read/Home.png)
 ![Interface do Carrinho de compras](vila-velha/read/Carrinho.png)
 ![Login](vila-velha/read/Login.png)
