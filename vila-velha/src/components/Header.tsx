@@ -3,10 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const navigate = useNavigate();
-  const isAdmin = localStorage.getItem('isAdmin') === 'true';
-  const isLoggedIn = localStorage.getItem('isAdmin') !== null;
+  const isAdmin = localStorage.getItem('isAdmin') === 'true'; // Checa se a chave admin é true dentro do Storage
+  const isLoggedIn = localStorage.getItem('isAdmin') !== null; // Checa se a chave Admin existe independente do valor, para diferenciar alguém logado ou não
 
-  const handleLogout = () => {
+  const handleLogout = () => { //Após deslogar, o status de admin é removido do storage e uma mensagem de aviso é mostrada ao usuário
     localStorage.removeItem('isAdmin');
     alert('Você saiu da conta.');
     navigate('/');
@@ -37,7 +37,7 @@ const Header = () => {
             Carrinho
           </NavLink>
 
-          {isAdmin ? (
+          {isAdmin ? ( //Caso o usuário seja admin, o header tem uma funcionalidade extra que é o "Painel Admin"
             <>
               <NavLink to="/paineladmin" className="bg-green-700 text-white px-4 py-2 rounded-full hover:bg-green-800 transition">
                 Painel Admin
@@ -51,9 +51,6 @@ const Header = () => {
             </>
           ) : isLoggedIn ? (
             <>
-              {/* <NavLink to="/perfil" className="bg-blue-700 text-white px-4 py-2 rounded-full hover:bg-blue-800 transition">   Talvez futuramente colocar um perfil de usuário
-                Perfil
-              </NavLink> */} 
               <button
                 onClick={handleLogout}
                 className="bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition font-dmserif text-lg"

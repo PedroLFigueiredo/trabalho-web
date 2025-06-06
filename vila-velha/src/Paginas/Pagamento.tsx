@@ -18,7 +18,7 @@ function Pagamento() {
   const [cartao, setCartao] = useState({ numero: '', nome: '', validade: '', cvv: '' });
 
   const totalProdutos = cartItems.reduce((acc, item) => acc + item.precoNumero * item.quantidade, 0);
-
+  // Se o usuário escolhe pix como forma de pagamento, recebe 5% de desconto
   useEffect(() => {
     setDesconto(formaPagamento === 'pix' ? totalProdutos * 0.05 : 0);
   }, [formaPagamento, totalProdutos]);
@@ -70,7 +70,8 @@ function Pagamento() {
             value={formaPagamento}
             onChange={e => setFormaPagamento(e.target.value)}
             className="w-full border border-gray-300 rounded px-4 py-2"
-          >
+            //Opções de pagamento disponíveis
+          > 
             <option value="">Selecione</option>
             <option value="cartao">Cartão</option>
             <option value="pix">PIX (5% de desconto)</option>

@@ -12,6 +12,7 @@ export interface CartItem {
   quantidade: number;
 }
 
+// Interface que define o formato dos dados disponíveis no contexto
 interface CartContextData {
   cartItems: CartItem[];
   addToCart: (item: CartItem) => void;
@@ -21,11 +22,12 @@ interface CartContextData {
   total: number;
 }
 
+// Criação do contexto do carrinho
 const CartContext = createContext<CartContextData | null>(null);
 
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
-
+  // Adicionar item para o Carrinho
   const addToCart = (item: CartItem) => {
     setCartItems(prevItems =>
       prevItems.some(i => i.slug === item.slug)
@@ -35,7 +37,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         : [...prevItems, { ...item, quantidade: 1 }]
     );
   };
-
+  // Reduz a quantidade de um item, ou o remove se quantidade for 1
   const decreaseQty = (slug: string) => {
     setCartItems(prevItems =>
       prevItems.flatMap(i =>
@@ -47,7 +49,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       )
     );
   };
-
+ // Remove completamente um item do carrinho
   const removeFromCart = (slug: string) => {
     setCartItems(prevItems => prevItems.filter(i => i.slug !== slug));
   };
@@ -58,7 +60,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     (sum, i) => sum + i.precoNumero * i.quantidade,
     0
   );
-
+ // Provedor que expõe o estado e as funções para o restante da aplicação
   return (
     <CartContext.Provider
       value={{ cartItems, addToCart, decreaseQty, removeFromCart, clearCart, total }}

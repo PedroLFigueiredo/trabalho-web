@@ -12,7 +12,7 @@ function PainelAdmin() {
   const { estoque } = useEstoque();
 
   useEffect(() => {
-    const isAdmin = localStorage.getItem('isAdmin');
+    const isAdmin = localStorage.getItem('isAdmin'); // Checa a chave admin no localstorage para definir se o usuário tem acesso ao painel de Admin
     if (isAdmin !== 'true') {
       alert('Acesso não autorizado');
       navigate('/');

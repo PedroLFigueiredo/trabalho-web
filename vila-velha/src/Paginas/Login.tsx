@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 
 function Login() {
+  // Estados para armazenar email e senha digitados pelo usuário
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ function Login() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Simulação
+    // Simulação para testar as funcionalidades de admin e usuário comum
     if (email === 'admin@carros.com' && senha === '123456') {
       localStorage.setItem('isAdmin', 'true');
       alert('Login como administrador!');

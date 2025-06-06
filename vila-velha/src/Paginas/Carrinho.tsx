@@ -5,10 +5,10 @@ import Footer from '../components/Footer';
 import { useCart } from './CarrinhoContext';
 
 function Carrinho() {
-  const { cartItems, removeFromCart, clearCart } = useCart();
+  const { cartItems, removeFromCart, clearCart } = useCart(); // Importa as funções para remover um item do carrinho, ou para limpar todo o carrinho. 
   const navigate = useNavigate();
 
-  const total = cartItems.reduce((acc, item) => acc + item.precoNumero * item.quantidade, 0);
+  const total = cartItems.reduce((acc, item) => acc + item.precoNumero * item.quantidade, 0); // Calcula o preço total da compra
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -17,7 +17,7 @@ function Carrinho() {
       <main className="flex-grow container mx-auto px-4 py-8">
         <h1 className="text-4xl font-retro text-[#5e3a1f] mb-8">Seu Carrinho</h1>
 
-        {cartItems.length === 0 ? (
+        {cartItems.length === 0 ? ( // Se o Carrinho estiver vazio, mostra uma mensagem e apresenta o botão voltar as compras
           <div className="text-center">
             <p className="text-xl mb-4">Seu carrinho está vazio</p>
             <button
@@ -77,14 +77,14 @@ function Carrinho() {
               </p>
 
               <div className="flex gap-4">
-                <button
+                <button // Botão para limpar o carrinho
                   onClick={clearCart}
                   className="px-4 py-2 border border-red-600 text-red-600 rounded hover:bg-red-50 transition"
                 >
                   Limpar Carrinho
                 </button>
-
-                <button
+                        
+                <button //Botão que leva o usuário para a página de pagamento
                   onClick={() => navigate('/pagamento')}
                   className="px-6 py-2 bg-[#3e2f2f] text-white rounded hover:bg-[#5e3a1f] transition"
                 >
