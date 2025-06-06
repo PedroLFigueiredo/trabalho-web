@@ -13,7 +13,7 @@ O objetivo do projeto é criar uma pequena loja de carros, com as funcionalidade
 
 ## Funcionalidades
 
-- Home page com 3 carros na Vitrine
+- Home page com 3 carros na Expostos
 - Interface de Login
 - Loja com diversos modelos
 - Interface com detalhes do carro
