@@ -10,14 +10,29 @@ function Cadastro() {
   const [senha, setSenha] = useState('');
   const navigate = useNavigate();
 
-  const handleCadastro = (e: React.FormEvent) => {
-    e.preventDefault();
+const handleCadastro = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    // Simulação
-    console.log({ nome, endereco, telefone, email, senha });
-    alert('Cadastro realizado com sucesso!');
-    navigate('/');
-  };
+  try {
+    const response = await fetch('http://localhost:3001/api/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nome, endereco, telefone, email, senha }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert('Cadastro realizado com sucesso!');
+      navigate('/login');
+    } else {
+      alert(data.message || 'Erro ao cadastrar');
+    }
+  } catch (error) {
+    alert('Erro ao conectar com o servidor');
+    console.error(error);
+  }
+};
 
   return (
 

@@ -10,23 +10,36 @@ function Login() {
   const [senha, setSenha] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Simulação para testar as funcionalidades de admin e usuário comum
-    if (email === 'admin@carros.com' && senha === '123456') {
-      localStorage.setItem('isAdmin', 'true');
-      alert('Login como administrador!');
-      navigate('/paineladmin');
-    }else if(email === 'cliente@carros.com' && senha === '654321'){
-      localStorage.setItem('isAdmin', 'false');
-      alert('Login bem-sucedido!');
-      navigate('/');
-    }
-    else {
-      alert('Credenciais inválidas');
+    try {
+      const response = await fetch('http://localhost:3001/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, senha }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem('userId', data.userId);
+        localStorage.setItem('nome', data.nome);
+        localStorage.setItem('carrinho', JSON.stringify(data.carrinho || []));
+        localStorage.setItem('isAdmin', data.isAdmin || 'false');
+
+        alert('Login realizado com sucesso!');
+        navigate('/');
+      } else {
+        alert(data.message || 'Erro no login');
+      }
+    } catch (error) {
+      console.error('Erro ao conectar com o servidor:', error);
+      alert('Erro de conexão com o servidor');
     }
   };
+
+
 
   return (
 

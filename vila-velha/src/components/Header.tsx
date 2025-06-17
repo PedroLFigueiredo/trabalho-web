@@ -1,13 +1,18 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useCart } from '../Paginas/CarrinhoContext'; // ajuste o caminho conforme sua estrutura
 
 const Header = () => {
   const navigate = useNavigate();
-  const isAdmin = localStorage.getItem('isAdmin') === 'true'; // Checa se a chave admin é true dentro do Storage
-  const isLoggedIn = localStorage.getItem('isAdmin') !== null; // Checa se a chave Admin existe independente do valor, para diferenciar alguém logado ou não
+  const { clearCart } = useCart(); // importa a função de limpar o carrinho
+  const isAdmin = localStorage.getItem('isAdmin') === 'true';
+  const isLoggedIn = localStorage.getItem('isAdmin') !== null;
 
-  const handleLogout = () => { //Após deslogar, o status de admin é removido do storage e uma mensagem de aviso é mostrada ao usuário
+  const handleLogout = () => {
     localStorage.removeItem('isAdmin');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('email');
+    clearCart(); // limpa o carrinho
     alert('Você saiu da conta.');
     navigate('/');
   };
@@ -37,7 +42,7 @@ const Header = () => {
             Carrinho
           </NavLink>
 
-          {isAdmin ? ( //Caso o usuário seja admin, o header tem uma funcionalidade extra que é o "Painel Admin"
+          {isAdmin ? (
             <>
               <NavLink to="/paineladmin" className="bg-green-700 text-white px-4 py-2 rounded-full hover:bg-green-800 transition">
                 Painel Admin
@@ -81,3 +86,5 @@ const NavLink = ({ to, children, className = "" }: { to: string; children: React
 };
 
 export default Header;
+
+
