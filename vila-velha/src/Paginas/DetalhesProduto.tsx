@@ -34,6 +34,9 @@ export default function DetalhesCarro() {
   const handleCampoChange = (campo: keyof Carro, valor: string | number) => {
     const novoValor = campo === 'preco' || campo === 'estoque' ? Number(valor) : valor;
     const atualizado = { ...carro, [campo]: novoValor };
+    if (campo === 'estoque' && Number(valor) < 0) {
+      return; // Ignora valores negativos para estoque
+  }
     setCarro(atualizado);
 
     // Atualiza o estado global do estoque
