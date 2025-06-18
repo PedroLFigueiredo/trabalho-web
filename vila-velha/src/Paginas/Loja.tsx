@@ -1,55 +1,73 @@
-// Importa bibliotecas e componentes necessários
+// Em src/pages/Loja.tsx
+
 import React from 'react';
-import Header from '../components/Header'; // Cabeçalho do site
-import Footer from '../components/Footer'; // Rodapé do site
-import CardCarro from '../components/CardCarro'; // Componente para exibir informações de cada carro
-import { useEstoque } from '../tools/useEstoque'; // Hook personalizado para acessar e atualizar o estoque
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import CardCarro from '../components/CardCarro';
+import { useEstoque } from '../tools/useEstoque';
 
-// Componente funcional que representa a página da loja
 export default function Loja() {
-  // Usa o hook personalizado para obter o estado do estoque e a função para atualizá-lo
-  const { estoque, setEstoque } = useEstoque();
-
-  // Verifica se o usuário é administrador (com base no valor salvo no localStorage)
+  // O hook agora retorna mais informações!
+  const { estoque, isLoading, error, refetchEstoque } = useEstoque();
   const isAdmin = localStorage.getItem('isAdmin') === 'true';
 
-  // Função para atualizar uma propriedade de um item específico do estoque
-  const handleUpdate = (
-    index: number, // Índice do item no array
-    campo: 'preco' | 'estoque' | 'descricao' | 'seloDilvan', // Campo a ser atualizado
-    valor: string | number | boolean // Novo valor
+  // O handleUpdate agora fará uma chamada de API
+  const handleUpdate = async (
+    carroId: string,
+    campo: 'preco' | 'estoque' | 'descricao',
+    valor: string | number
   ) => {
-    const novo = [...estoque]; // Cria uma cópia do estoque
-    // Atualiza o campo com o novo valor (converte para número se for preco ou estoque)
-    (novo[index] as any)[campo] =
-      campo === 'preco' || campo === 'estoque' ? Number(valor) : valor;
-    setEstoque(novo); // Atualiza o estado com o novo estoque
+    try {
+      await fetch(`http://localhost:3001/api/carros/${carroId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ [campo]: valor }),
+      });
+      // Após atualizar, buscamos a lista nova
+      refetchEstoque();
+    } catch (e) {
+      console.error("Falha ao atualizar o carro", e);
+      alert("Erro ao atualizar. Tente novamente.");
+    }
+  };
+
+  // Lógica de renderização condicional
+  const renderContent = () => {
+    if (isLoading) {
+      return <p className="text-center text-xl">Carregando nossa garagem...</p>;
+    }
+    if (error) {
+      return <p className="text-center text-xl text-red-500">Erro ao buscar carros: {error}</p>;
+    }
+    if (estoque.length === 0) {
+      return <p className="text-center text-xl">Nenhum carro em exposição no momento.</p>;
+    }
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {estoque.map((carro) => (
+          <CardCarro
+            key={carro.slug}
+            {...carro}
+            isAdmin={isAdmin}
+            // Passamos o ID do carro para a função de update
+            onUpdate={(campo, valor) => handleUpdate(carro._id, campo, valor)}
+          />
+        ))}
+      </div>
+    );
   };
 
   return (
-    <div className="flex flex-col min-h-screen"> {/* Layout de coluna com altura mínima da tela */}
-      <Header /> {/* Cabeçalho do site */}
-      <main className="flex-grow py-10 px-4"> {/* Conteúdo principal com preenchimento interno */}
-        <div className="container mx-auto"> {/* Centraliza o conteúdo */}
-          <h2 className="text-4xl font-retro text-center text-[#5e3a1f] mb-4">
-            Nossa Loja {/* Título da página */}
-          </h2>
-          {/* Grelha responsiva para exibir os carros */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Mapeia o array de carros do estoque e renderiza um CardCarro para cada um */}
-            {estoque.map((carro, idx) => (
-              <CardCarro
-                key={carro.slug} // Chave única para o React
-                {...carro} // Passa todas as props do carro como props para o componente
-                preco={carro.preco.toString()} // Garante que o preço será passado como string
-                isAdmin={isAdmin} // Indica se o usuário é admin (permite edição)
-                onUpdate={(campo, valor) => handleUpdate(idx, campo, valor)} // Função para atualizar os dados
-              />
-            ))}
-          </div>
-        </div>
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      {/* Aplicando o mesmo container e espaçamento do Carrinho.tsx */}
+      <main className="flex-grow container mx-auto px-4 py-8">
+        <h2 className="text-4xl font-retro text-center text-[#5e3a1f] mb-8">
+          Nossa Loja
+        </h2>
+        {renderContent()}
       </main>
-      <Footer /> {/* Rodapé do site */}
+      <Footer />
     </div>
   );
 }

@@ -1,3 +1,5 @@
+// src/components/CardCarro.tsx
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -10,17 +12,9 @@ interface CardCarroProps {
   estoque?: number;
   slug: string;
   seloDilvan?: boolean;
-
-  /** Só para admin: ativa modo de edição */
   isAdmin?: boolean;
-
-  /** Só para admin: callback ao editar */
-  onUpdate?: (
-    campo: 'preco' | 'estoque' | 'descricao', 
-    valor: string | number
-  ) => void;
+  onUpdate?: (campo: 'preco' | 'estoque' | 'descricao', valor: string | number) => void;
 }
-
 
 const CardCarro = ({
   modelo,
@@ -30,8 +24,18 @@ const CardCarro = ({
   imagem = "https://placehold.co/400x300/e9e2d0/8B4513?text=Carro+Antigo",
   estoque,
   slug,
-  seloDilvan
+  seloDilvan,
+  isAdmin,
+  onUpdate,
 }: CardCarroProps) => {
+  
+  const BACKEND_URL = 'http://localhost:3001';
+  
+  // Lógica condicional para montar a URL da imagem
+  const imageUrl = imagem && imagem.startsWith('/uploads/') 
+    ? `${BACKEND_URL}${imagem}` 
+    : imagem;
+
   return (
     <div className="vintage-card overflow-hidden flex flex-col h-full relative rounded-lg shadow-md border border-[#c4a484] hover:scale-105 transition-transform duration-300">
       <div className="relative">
@@ -48,7 +52,7 @@ const CardCarro = ({
             </div>
           )}
         <img
-          src={imagem}
+          src={imageUrl}
           alt={`${modelo} ${ano}`}
           className="object-cover w-full h-56 rounded-t-lg"
         />

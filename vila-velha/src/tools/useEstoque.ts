@@ -1,31 +1,48 @@
-// src/hooks/useEstoque.ts
-import { useState, useEffect } from 'react';
-import estoqueInicial from '../data/carros';
+// src/tools/useEstoque.ts
 
-// Define a interface para o objeto Carro
+import { useState, useEffect, useCallback } from 'react';
+
+// AQUI ESTÁ A CORREÇÃO: Adicionamos os novos campos à interface.
+// A interrogação (?) os torna opcionais, o que é uma boa prática.
 export interface Carro {
+  _id: string;
   modelo: string;
   ano: number;
   descricao: string;
-  descricaoDetalhada?: string;
-  preco: number;
-  imagem: string;
+  descricaoDetalhada?: string; // <-- ADICIONADO
+  preco: string;
+  imagem?: string;
   estoque: number;
   slug: string;
-  audio?: string;
   seloDilvan?: boolean;
+  audio?: string; // <-- ADICIONADO
 }
 
-export function useEstoque() {
-   // Inicializa o estado do estoque. Se houver dados no localStorage, usa-os; caso contrário, usa os dados iniciais.
-  const [estoque, setEstoque] = useState<Carro[]>(() => {
-    const salvo = localStorage.getItem('estoqueLoja');
-    return salvo ? JSON.parse(salvo) : estoqueInicial;
-  });
-  // Sempre que o estoque for alterado, salva automaticamente no localStorage
+export const useEstoque = () => {
+  const [estoque, setEstoque] = useState<Carro[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const refetchEstoque = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await fetch('http://localhost:3001/api/carros');
+      if (!response.ok) {
+        throw new Error('Falha ao buscar dados do estoque.');
+      }
+      const data: Carro[] = await response.json();
+      setEstoque(data);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
-    localStorage.setItem('estoqueLoja', JSON.stringify(estoque));
-  }, [estoque]);
+    refetchEstoque();
+  }, [refetchEstoque]);
 
-  return { estoque, setEstoque };
-}
+  return { estoque, isLoading, error, refetchEstoque };
+};

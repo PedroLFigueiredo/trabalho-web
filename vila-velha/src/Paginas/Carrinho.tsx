@@ -5,10 +5,12 @@ import Footer from '../components/Footer';
 import { useCart } from './CarrinhoContext';
 
 function Carrinho() {
-  const { cartItems, removeFromCart, clearCart } = useCart(); // Importa as funções para remover um item do carrinho, ou para limpar todo o carrinho. 
-  const navigate = useNavigate();
+  const { cartItems, removeFromCart, clearCart } = useCart(); //
+  const navigate = useNavigate(); //
+  const BACKEND_URL = 'http://localhost:3001';
 
-  const total = cartItems.reduce((acc, item) => acc + item.precoNumero * item.quantidade, 0); // Calcula o preço total da compra
+  // Calcula o preço total da compra
+  const total = cartItems.reduce((acc, item) => acc + item.precoNumero * item.quantidade, 0);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -17,7 +19,8 @@ function Carrinho() {
       <main className="flex-grow container mx-auto px-4 py-8">
         <h1 className="text-4xl font-retro text-[#5e3a1f] mb-8">Seu Carrinho</h1>
 
-        {cartItems.length === 0 ? ( // Se o Carrinho estiver vazio, mostra uma mensagem e apresenta o botão voltar as compras
+        {/* Se o Carrinho estiver vazio, mostra uma mensagem e apresenta o botão voltar as compras */}
+        {cartItems.length === 0 ? (
           <div className="text-center">
             <p className="text-xl mb-4">Seu carrinho está vazio</p>
             <button
@@ -29,44 +32,49 @@ function Carrinho() {
           </div>
         ) : (
           <>
-            {}
             <div className="flex flex-col gap-6">
-              {cartItems.map((item) => (
-                <div
-                  key={item.slug}
-                  className="flex flex-col sm:flex-row items-center gap-4 border-b pb-4"
-                >
-                  <img
-                    src={item.imagem}
-                    alt={item.modelo}
-                    className="w-full sm:w-32 sm:h-20 object-cover rounded shadow"
-                  />
+              {cartItems.map((item) => {
+                // Lógica condicional para a imagem de cada item no carrinho
+                const imageUrl = item.imagem && item.imagem.startsWith('/uploads/')
+                  ? `${BACKEND_URL}${item.imagem}`
+                  : item.imagem;
 
-                  <div className="flex-1 text-center sm:text-left">
-                    <h2 className="text-2xl font-serif text-[#3e2f2f]">
-                      {item.modelo} ({item.ano})
-                    </h2>
-                    <p className="text-[#5e3a1f]">Qtd: {item.quantidade}</p>
-                    <p className="text-[#9b4c28] font-bold">
-                      {item.precoNumero} × {item.quantidade} ={' '}
-                      {(item.precoNumero * item.quantidade).toLocaleString('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL',
-                      })}
-                    </p>
-                  </div>
-
-                  <button
-                    onClick={() => removeFromCart(item.slug)}
-                    className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition"
+                return (
+                  <div
+                    key={item.slug}
+                    className="flex flex-col sm:flex-row items-center gap-4 border-b pb-4"
                   >
-                    Remover
-                  </button>
-                </div>
-              ))}
+                    <img
+                      src={imageUrl} // URL condicional aplicada aqui
+                      alt={item.modelo}
+                      className="w-full sm:w-32 sm:h-20 object-cover rounded shadow" //
+                    />
+
+                    <div className="flex-1 text-center sm:text-left">
+                      <h2 className="text-2xl font-serif text-[#3e2f2f]">
+                        {item.modelo} ({item.ano})
+                      </h2>
+                      <p className="text-[#5e3a1f]">Qtd: {item.quantidade}</p>
+                      <p className="text-[#9b4c28] font-bold">
+                        {item.precoNumero} × {item.quantidade} ={' '}
+                        {(item.precoNumero * item.quantidade).toLocaleString('pt-BR', {
+                          style: 'currency',
+                          currency: 'BRL',
+                        })}
+                      </p>
+                    </div>
+
+                    <button
+                      onClick={() => removeFromCart(item.slug)} //
+                      className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition"
+                    >
+                      Remover
+                    </button>
+                  </div>
+                );
+              })}
             </div>
 
-            {}
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
               <p className="text-2xl font-bold text-[#3e2f2f]">
                 Total:{' '}
@@ -77,14 +85,16 @@ function Carrinho() {
               </p>
 
               <div className="flex gap-4">
-                <button // Botão para limpar o carrinho
+                {/* Botão para limpar o carrinho */}
+                <button
                   onClick={clearCart}
                   className="px-4 py-2 border border-red-600 text-red-600 rounded hover:bg-red-50 transition"
                 >
                   Limpar Carrinho
                 </button>
                         
-                <button //Botão que leva o usuário para a página de pagamento
+                {/* Botão que leva o usuário para a página de pagamento */}
+                <button
                   onClick={() => navigate('/pagamento')}
                   className="px-6 py-2 bg-[#3e2f2f] text-white rounded hover:bg-[#5e3a1f] transition"
                 >
