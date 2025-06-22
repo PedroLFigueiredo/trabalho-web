@@ -3,43 +3,65 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useCart } from './CarrinhoContext';
 import { useNavigate } from 'react-router-dom';
-import { useEstoque } from '../tools/useEstoque';
+import { useEstoque } from '../tools/useEstoque'; // Importado para ter acesso ao refetchEstoque
 import { useAdminStats } from '../tools/useAdminStats';
 
 function Pagamento() {
-  const { cartItems, clearCart } = useCart();
-  const { estoque, setEstoque } = useEstoque();
-  const { registrarVenda } = useAdminStats();
-  const navigate = useNavigate();
+  const { cartItems, clearCart } = useCart(); //
+  const { refetchEstoque } = useEstoque(); // Pegar a função para atualizar o estoque do frontend via API
+  const { registrarVenda } = useAdminStats(); //
+  const navigate = useNavigate(); //
 
-  const [frete] = useState(100);
-  const [desconto, setDesconto] = useState(0);
-  const [formaPagamento, setFormaPagamento] = useState('');
-  const [cartao, setCartao] = useState({ numero: '', nome: '', validade: '', cvv: '' });
+  const [frete] = useState(100); //
+  const [desconto, setDesconto] = useState(0); //
+  const [formaPagamento, setFormaPagamento] = useState(''); //
+  const [cartao, setCartao] = useState({ numero: '', nome: '', validade: '', cvv: '' }); //
 
-  const totalProdutos = cartItems.reduce((acc, item) => acc + item.precoNumero * item.quantidade, 0);
+  // URL base do backend para as imagens
+  const BACKEND_URL = 'http://localhost:3001'; // Adicionei aqui
+
+  const totalProdutos = cartItems.reduce((acc, item) => acc + item.precoNumero * item.quantidade, 0); //
+
   // Se o usuário escolhe pix como forma de pagamento, recebe 5% de desconto
   useEffect(() => {
-    setDesconto(formaPagamento === 'pix' ? totalProdutos * 0.05 : 0);
+    setDesconto(formaPagamento === 'pix' ? totalProdutos * 0.05 : 0); //
   }, [formaPagamento, totalProdutos]);
 
-  const total = totalProdutos + frete - desconto;
+  const total = totalProdutos + frete - desconto; //
 
-  const confirmarPagamento = () => {
-    // 1) Atualiza estoque
-    const novoEstoque = [...estoque];
-    cartItems.forEach(item => {
-      const idx = novoEstoque.findIndex(c => c.slug === item.slug);
-      if (idx !== -1) novoEstoque[idx].estoque -= item.quantidade;
-    });
-    setEstoque(novoEstoque);
+  // Função AGORA assíncrona para finalizar a compra com o backend
+  const confirmarPagamento = async () => { // Adicionado 'async'
+    try {
+      // 1) Envia os itens do carrinho para o backend para processar a transação
+      const response = await fetch(`${BACKEND_URL}/api/transacao/finalizar`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          cartItems: cartItems, // Envia todos os itens do carrinho
+          totalCompra: total, // Envia o total calculado
+          userId: localStorage.getItem('userId'), // Se você precisar associar a compra a um usuário
+        }),
+      });
 
-    // 2) Registra estatísticas
-    registrarVenda(cartItems);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Falha ao finalizar a compra no servidor.');
+      }
 
-    // 3) Limpa carrinho e redireciona
-    clearCart();
-    navigate('/loja');
+      // Se o backend confirmou a compra e atualizou o estoque, atualizamos o frontend
+      refetchEstoque(); // Recarrega o estoque na loja para refletir a compra
+      registrarVenda(cartItems); // (mantido para a lógica local de adminStats)
+
+      clearCart(); //
+      alert('Compra finalizada com sucesso!');
+      navigate('/loja'); // Redireciona para a loja após a compra
+
+    } catch (error: any) {
+      console.error('Erro ao finalizar compra:', error);
+      alert('Erro ao finalizar compra: ' + error.message + '. Por favor, tente novamente.');
+    }
   };
 
   return (
@@ -50,16 +72,27 @@ function Pagamento() {
         {/* Lista de produtos */}
         <div className="flex-1 space-y-6">
           <h2 className="text-2xl font-bold text-[#5e3a1f]">Produtos</h2>
-          {cartItems.map(item => (
-            <div key={item.slug} className="flex items-center gap-4 border-b pb-4">
-              <img src={item.imagem} alt={item.modelo} className="w-24 h-16 object-cover rounded shadow" />
-              <div>
-                <p className="text-lg font-semibold">{item.modelo} ({item.ano})</p>
-                <p>Qtd: {item.quantidade}</p>
-                <p>{(item.precoNumero * item.quantidade).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
+          {cartItems.map(item => {
+            // Lógica para construir a URL completa da imagem
+            const imageUrl = item.imagem && item.imagem.startsWith('/uploads/')
+              ? `${BACKEND_URL}${item.imagem}`
+              : item.imagem;
+
+            return (
+              <div key={item.slug} className="flex items-center gap-4 border-b pb-4">
+                <img
+                  src={imageUrl} // Usando a URL COMPLETA aqui!
+                  alt={item.modelo}
+                  className="w-24 h-16 object-cover rounded shadow"
+                />
+                <div>
+                  <p className="text-lg font-semibold">{item.modelo} ({item.ano})</p>
+                  <p>Qtd: {item.quantidade}</p>
+                  <p>{(item.precoNumero * item.quantidade).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
 
           {/* Frete e forma de pagamento */}
           <h2 className="text-2xl font-bold text-[#5e3a1f]">Entrega</h2>
@@ -70,8 +103,7 @@ function Pagamento() {
             value={formaPagamento}
             onChange={e => setFormaPagamento(e.target.value)}
             className="w-full border border-gray-300 rounded px-4 py-2"
-            //Opções de pagamento disponíveis
-          > 
+          >
             <option value="">Selecione</option>
             <option value="cartao">Cartão</option>
             <option value="pix">PIX (5% de desconto)</option>

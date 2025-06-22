@@ -8,10 +8,10 @@ import { useCart } from './CarrinhoContext';
 export default function DetalhesCarro() {
   // --- Hooks e Constantes ---
   const { slug } = useParams<{ slug: string }>(); 
-  const navigate = useNavigate(); //
-  const { addToCart } = useCart(); //
+  const navigate = useNavigate(); 
+  const { addToCart } = useCart(); 
   const isAdmin = localStorage.getItem('isAdmin') === 'true'; 
-  const BACKEND_URL = 'http://localhost:3001';
+  const BACKEND_URL = 'http://localhost:3001'; // URL base do backend
 
   // --- Estados do Componente ---
   const [carro, setCarro] = useState<Carro | null>(null);
@@ -30,7 +30,7 @@ export default function DetalhesCarro() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(`http://localhost:3001/api/carros/${slug}`);
+      const response = await fetch(`${BACKEND_URL}/api/carros/${slug}`); // Usa BACKEND_URL
       if (!response.ok) throw new Error('Carro não encontrado.');
       const data: Carro = await response.json();
       setCarro(data);
@@ -46,10 +46,10 @@ export default function DetalhesCarro() {
   }, [fetchCarro]);
 
   // Atualiza campos editáveis (apenas para admin)
-  const handleCampoChange = (campo: keyof Carro, valor: string | number) => { //
+  const handleCampoChange = (campo: keyof Carro, valor: string | number) => { 
     if (!carro) return;
     const novoValor = campo === 'preco' || campo === 'estoque' ? Number(valor) : valor;
-    if (campo === 'estoque' && Number(valor) < 0) return; //
+    if (campo === 'estoque' && Number(valor) < 0) return; 
     setCarro({ ...carro, [campo]: novoValor });
   };
 
@@ -57,7 +57,7 @@ export default function DetalhesCarro() {
   const handleSaveChanges = async () => {
     if (!carro) return;
     try {
-        const response = await fetch(`http://localhost:3001/api/carros/${carro._id}`, {
+        const response = await fetch(`${BACKEND_URL}/api/carros/${carro._id}`, { // Usa BACKEND_URL
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(carro)
@@ -70,10 +70,10 @@ export default function DetalhesCarro() {
   }
 
   // Adiciona o carro ao carrinho e redireciona
-  const handleAddToCart = () => { //
+  const handleAddToCart = () => { 
     if (!carro) return;
     addToCart({ ...carro, precoNumero: Number(carro.preco), quantidade: 1 });
-    navigate('/carrinho'); //
+    navigate('/carrinho'); 
   };
 
   // --- Renderização ---
@@ -91,7 +91,7 @@ export default function DetalhesCarro() {
     );
   }
 
-  // Lógica inteligente para o URL da imagem
+  // Lógica inteligente para o URL da imagem (já estava correto)
   const imageUrl = carro.imagem && carro.imagem.startsWith('/uploads/')
     ? `${BACKEND_URL}${carro.imagem}`
     : carro.imagem;
@@ -175,8 +175,8 @@ export default function DetalhesCarro() {
             <div className="mt-6 flex flex-wrap gap-4">
               {!isAdmin && (
                 <button
-                  onClick={handleAddToCart} //
-                  disabled={carro.estoque === 0} //
+                  onClick={handleAddToCart} 
+                  disabled={carro.estoque === 0} 
                   className="bg-[#3e2f2f] text-white px-6 py-3 rounded-md hover:bg-[#5e3a1f] transition-transform duration-200 ease-in-out hover:scale-105 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:scale-100"
                 >
                   Adicionar ao carrinho
@@ -192,7 +192,7 @@ export default function DetalhesCarro() {
               <div className="mt-8">
                 <h3 className="text-lg font-semibold text-[#3e3a1f]">Ouça o ronco do motor</h3>
                 <audio controls className="w-full mt-2">
-                  <source src={carro.audio} type="audio/mpeg" />
+                  <source src={`${BACKEND_URL}${carro.audio}`} type="audio/mpeg" /> {/* CORRIGIDO AQUI! */}
                   Seu navegador não suporta reprodução de áudio.
                 </audio>
               </div>

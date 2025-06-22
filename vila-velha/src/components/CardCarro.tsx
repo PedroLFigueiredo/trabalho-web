@@ -1,99 +1,63 @@
 // src/components/CardCarro.tsx
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// Se você já tem a interface Carro definida em outro lugar e importada, use-a.
+// Caso contrário, pode defini-la aqui ou em um arquivo de tipos global (ex: src/types/index.ts)
 interface CardCarroProps {
   modelo: string;
   ano: number;
   descricao: string;
-  preco: string;
-  imagem?: string;
-  estoque?: number;
+  preco: string; // Ou number, se for o caso
+  imagem: string; // Caminho da imagem que vem do backend, ex: "/uploads/imagens/carro.jpg"
   slug: string;
   seloDilvan?: boolean;
-  isAdmin?: boolean;
-  onUpdate?: (campo: 'preco' | 'estoque' | 'descricao', valor: string | number) => void;
+  isAdmin?: boolean; // Para o modo admin
+  onUpdate?: (campo: 'preco' | 'estoque' | 'descricao', valor: string | number) => void; // Para o modo admin
 }
 
-const CardCarro = ({
-  modelo,
-  ano,
-  descricao,
-  preco,
-  imagem = "https://placehold.co/400x300/e9e2d0/8B4513?text=Carro+Antigo",
-  estoque,
-  slug,
-  seloDilvan,
-  isAdmin,
-  onUpdate,
-}: CardCarroProps) => {
-  
+export default function CardCarro(props: CardCarroProps) {
+  // --- Adicione esta constante para a URL base do backend ---
   const BACKEND_URL = 'http://localhost:3001';
-  
-  // Lógica condicional para montar a URL da imagem
-  const imageUrl = imagem && imagem.startsWith('/uploads/') 
-    ? `${BACKEND_URL}${imagem}` 
-    : imagem;
+
+  // --- Adicione esta lógica para construir a URL completa da imagem ---
+  const imageUrl = props.imagem && props.imagem.startsWith('/uploads/')
+    ? `${BACKEND_URL}${props.imagem}`
+    : props.imagem; // Fallback caso o caminho não comece com /uploads/ (mas deveria)
 
   return (
-    <div className="vintage-card overflow-hidden flex flex-col h-full relative rounded-lg shadow-md border border-[#c4a484] hover:scale-105 transition-transform duration-300">
-      <div className="relative">
-          {seloDilvan && (
-            <div className="absolute top-2 left-2 z-20 group">
-              <img
-                src="/imagens/SeloDilvanDeQualidade.png"
-                alt="Selo de aprovação Dilvan"
-                className="w-20 h-20 animate-pulse"
-              />
-              <div className="absolute -bottom-7 left-1 bg-[#5e3a1f] text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap shadow">
-                Selo de Aprovação Dilvan !!
-              </div>
-            </div>
-          )}
-        <img
-          src={imageUrl}
-          alt={`${modelo} ${ano}`}
-          className="object-cover w-full h-56 rounded-t-lg"
-        />
-        <div className="absolute top-2 right-2 bg-[#5e3a1f] text-white py-1 px-3 rounded-full font-bold text-sm">
-          {ano}
-        </div>
-      </div>
+    <div className="bg-white rounded-lg shadow-lg overflow-hidden relative">
+      {/* Imagem do carro */}
+      <img
+        src={imageUrl} // <--- Use a variável imageUrl aqui!
+        alt={`${props.modelo} ${props.ano}`}
+        className="w-full h-48 object-cover" // Ajuste a altura e outros estilos conforme seu design
+      />
 
-      <div className="p-4 flex flex-col flex-grow">
-        <div className="mb-2 flex items-center justify-between">
-          <h3 className="font-retro text-2xl text-[#5e3a1f]">{modelo}</h3>
-          <p className="text-2xl font-bold text-[#9b4c28]">
-          {Number(preco).toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
-          })}
-        </p>
-        </div>
+      {/* Conteúdo do Card */}
+      <div className="p-4">
+        <h3 className="text-xl font-semibold text-[#5e3a1f] mb-2">{props.modelo} ({props.ano})</h3>
+        <p className="text-gray-700 text-sm mb-3 line-clamp-2">{props.descricao}</p>
+        <p className="text-2xl font-bold text-[#9b4c28] mb-4">R$ {props.preco}</p> {/* Assumindo que preco é string formatada */}
 
-        <div className="h-px w-full bg-[#c4a484] my-3"></div>
-
-        <p className="text-[#3e2f2f] font-serif mb-4 flex-grow">
-          {descricao}
-        </p>
-
-        <Link to={`/carro/${slug}`}>
-          <button className="bg-[#3e2f2f] text-white px-4 py-2 rounded-md mt-auto hover:bg-[#5e3a1f] transition-colors">
-            Ver detalhes
-          </button>
+        {/* Botão "Ver detalhes" */}
+        <Link 
+          to={`/detalhes/${props.slug}`}
+          className="block w-full text-center bg-[#3e2f2f] text-white py-2 rounded-md hover:bg-[#5e3a1f] transition"
+        >
+          Ver detalhes
         </Link>
+        {/* ... (mantenha o restante do seu CardCarro, como a lógica admin, se houver) */}
 
-        {typeof estoque === 'number' && (
-          <div className="mt-3 text-sm text-[#5e3a1f] font-semibold">
-            {estoque > 0
-              ? `${estoque} unidade${estoque > 1 ? 's' : ''} em estoque`
-              : 'Sem estoque'}
-          </div>
+        {/* Lógica do Selo Dilvan, se aplicável */}
+        {props.seloDilvan && (
+          <img
+            src={`${BACKEND_URL}/uploads/SeloDilvanDeQualidade.png`} // Caminho direto para o selo
+            alt="Selo de Qualidade Dilvan"
+            className="absolute top-2 right-2 w-16 h-auto" // Ajuste o posicionamento e tamanho
+          />
         )}
       </div>
     </div>
   );
-};
-
-export default CardCarro;
+}

@@ -39,23 +39,27 @@ router.post('/login', async (req, res) => {
   try {
     const { email, senha } = req.body;
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }); //
+
     if (!user) return res.status(400).json({ message: 'Usuário não encontrado' });
 
     const isMatch = await bcrypt.compare(senha, user.senha);
     if (!isMatch) return res.status(400).json({ message: 'Senha incorreta' });
 
+    // ADICIONE ESTA LINHA:
+    console.log("AUTH: isAdmin do user ANTES da resposta:", user.isAdmin); 
+
     res.status(200).json({
       message: 'Login bem-sucedido',
       userId: user._id,
       nome: user.nome,
-      carrinho: user.carrinho || [] // <-- Retorna carrinho do Mongo
+      carrinho: user.carrinho || [],
+      isAdmin: user.isAdmin
     });
   } catch (error) {
     res.status(500).json({ message: 'Erro no login', error });
   }
 });
-
 
 router.post('/update-cart', async (req, res) => {
   const { userId, carrinho } = req.body;

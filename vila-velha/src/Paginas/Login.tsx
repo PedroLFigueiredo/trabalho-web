@@ -22,68 +22,70 @@ function Login() {
 
       const data = await response.json();
 
+      console.log("LOGIN: Dados recebidos do backend após login:", data); // ADICIONADO PARA DEBUG
+
       if (response.ok) {
         localStorage.setItem('userId', data.userId);
         localStorage.setItem('nome', data.nome);
         localStorage.setItem('carrinho', JSON.stringify(data.carrinho || []));
-        localStorage.setItem('isAdmin', data.isAdmin || 'false');
+        
+        // Garante que 'isAdmin' seja salvo como string "true" ou "false"
+        localStorage.setItem('isAdmin', data.isAdmin ? 'true' : 'false'); 
+
+        console.log("LOGIN: isAdmin salvo no localStorage:", localStorage.getItem('isAdmin')); // ADICIONADO PARA DEBUG
 
         alert('Login realizado com sucesso!');
-        navigate('/');
+        navigate('/'); // Redireciona para a Home
       } else {
         alert(data.message || 'Erro no login');
       }
     } catch (error) {
-      console.error('Erro ao conectar com o servidor:', error);
+      console.error('LOGIN: Erro ao conectar com o servidor:', error); // ADICIONADO PARA DEBUG
       alert('Erro de conexão com o servidor');
     }
   };
 
 
-
   return (
-
-
     <div className="flex flex-col min-h-screen">
       <Header />
-    <div className="flex flex-col min-h-screen justify-center items-center bg-[#fffaf2]">
+      <div className="flex flex-col min-h-screen justify-center items-center bg-[#fffaf2]">
         
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
-        <h1 className="text-2xl font-bold mb-6 text-[#5e3a1f] text-center">Login</h1>
-        <form onSubmit={handleLogin} className="flex flex-col gap-4">
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            required
-            className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5e3a1f]"
-          />
-          <input
-            type="password"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            placeholder="Senha"
-            required
-            className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5e3a1f]"
-          />
-          <button
-            type="submit"
-            className="bg-[#5e3a1f] text-white py-2 rounded hover:bg-[#3e2f2f] transition"
-          >
-            Entrar
-          </button>
-        </form>
-        <div className="text-center text-sm text-gray-600 mt-2">
-            Não tem conta?{' '}
-            <Link to="/cadastro" className="text-[#5e3a1f] font-semibold hover:underline">
-                Cadastre-se
-            </Link>
+        <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
+          <h1 className="text-2xl font-bold mb-6 text-[#5e3a1f] text-center">Login</h1>
+          <form onSubmit={handleLogin} className="flex flex-col gap-4">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              required
+              className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5e3a1f]"
+            />
+            <input
+              type="password"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              placeholder="Senha"
+              required
+              className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5e3a1f]"
+            />
+            <button
+              type="submit"
+              className="bg-[#5e3a1f] text-white py-2 rounded hover:bg-[#3e2f2f] transition"
+            >
+              Entrar
+            </button>
+          </form>
+          <div className="text-center text-sm text-gray-600 mt-2">
+              Não tem conta?{' '}
+              <Link to="/cadastro" className="text-[#5e3a1f] font-semibold hover:underline">
+                  Cadastre-se
+              </Link>
+          </div>
         </div>
-
       </div>
     </div>
-  </div>
   );
 }
 

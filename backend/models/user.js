@@ -16,11 +16,15 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true, // impede duplicação de email
+    unique: true,
   },
   senha: {
     type: String,
     required: true,
+  },
+  isAdmin: { // <--- ADICIONE OU CONFIRME ESTE BLOCO!
+    type: Boolean,
+    default: false,
   },
   carrinho: [
     {
@@ -34,7 +38,7 @@ const userSchema = new mongoose.Schema({
     }
   ]
 }, {
-  timestamps: true, // cria campos createdAt e updatedAt automaticamente
+  timestamps: true,
 });
 
 module.exports = mongoose.model('User', userSchema);

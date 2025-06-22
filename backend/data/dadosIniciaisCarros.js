@@ -256,4 +256,4 @@ const estoqueLoja = [
   }
 ];
 
-export default estoqueLoja;
+module.exports = estoqueLoja;

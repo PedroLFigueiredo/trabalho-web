@@ -10,6 +10,7 @@ import Pagamento from './Paginas/Pagamento';
 import PainelAdmin from './Paginas/PainelAdmin';
 import Login from './Paginas/Login';
 import Cadastro from './Paginas/Cadastro';
+import DetalhesUsuario from './Paginas/DetalhesUsuario'; // <--- ADICIONE ESTA LINHA
 
 function App() {
   return (
@@ -19,12 +20,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/loja" element={<Loja />} />
-            <Route path="/carro/:slug" element={<DetalhesProduto />} />
+            <Route path="/detalhes/:slug" element={<DetalhesProduto />} />
             <Route path="/carrinho" element={<Carrinho />} />
             <Route path="/pagamento" element={<Pagamento />} />
             <Route path="/paineladmin" element={<PainelAdmin />} />
             <Route path="/login" element={<Login />} />
             <Route path="/cadastro" element={<Cadastro />} />
+            {/* NOVO: Rota para detalhes do usuário */}
+            <Route path="/admin/users/:id" element={<DetalhesUsuario />} /> {/* <--- ADICIONE ESTA LINHA */}
           </Routes>
         </AdminStatsProvider>
       </CartProvider>
